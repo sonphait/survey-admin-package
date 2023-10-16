@@ -1,7 +1,7 @@
 1) In your terminal:
 
 ``` bash
-$ composer require sonph/survey
+$ composer require sonph/survey_admin
 ```
 
 2) Publish the config file:

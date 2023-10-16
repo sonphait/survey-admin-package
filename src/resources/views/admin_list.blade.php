@@ -30,6 +30,7 @@
                 <th>Created at</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
             <tbody>
 
@@ -43,6 +44,13 @@
                     <a href="{{ route('survey.show_create', ['id' => $row->id]) }}">
                         <button>
                             Edit survey
+                        </button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ route('survey.results.list', ['id' => $row->id]) }}">
+                        <button>
+                            Show results
                         </button>
                     </a>
                 </td>

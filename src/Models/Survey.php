@@ -46,6 +46,6 @@ class Survey extends Model
      */
     public function results()
     {
-        return $this->hasMany('Sonphait\Survey\Models\SurveyResult', 'survey_id');
+        return $this->hasMany('Sonphait\SurveyAdmin\Models\SurveyResult', 'survey_id');
     }
 }

@@ -19,7 +19,7 @@ class SurveyResult extends Model
      */
     public function survey()
     {
-        return $this->belongsTo('Sonphait\Survey\Models\Survey', 'survey_id');
+        return $this->belongsTo('Sonphait\SurveyAdmin\Models\Survey', 'survey_id');
     }
 
     /**

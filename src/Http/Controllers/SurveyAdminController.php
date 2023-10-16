@@ -5,6 +5,7 @@ namespace Sonphait\SurveyAdmin\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Sonphait\SurveyAdmin\Models\Survey;
+use Sonphait\SurveyAdmin\Models\SurveyResult;
 
 class SurveyAdminController extends Controller
 {
@@ -51,5 +52,17 @@ class SurveyAdminController extends Controller
         $survey->delete();
 
         return redirect()->route('survey.admin.index', ['surveys' => Survey::all()]);
+    }
+
+    public function result_list($id)
+    {
+        $surveyResults = SurveyResult::where('survey_id', $id)->orderBy('created_at')->get();
+        return view('survey-manager::result_list', ['surveyResults' => $surveyResults]);
+    }
+
+    public function result_detail($id)
+    {
+        $result = SurveyResult::with('survey')->findOrFail($id);
+        return view('survey-manager::result_detail', ['result' => $result]);
     }
 }

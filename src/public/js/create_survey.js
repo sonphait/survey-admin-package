@@ -1,6 +1,5 @@
 $(document).ready(function() {
     const surveyId = $('#survey_id').val();
-    const surveyJson = $('#survey_json').val();
     const creatorOptions = {
         showLogicTab: true,
         isAutoSave: true
@@ -20,9 +19,13 @@ $(document).ready(function() {
             }]
         }]
     };
-
+    let surveyJson = $('#survey_json').val();
+    console.log(surveyJson);
+    if (surveyJson == '{}') {
+        surveyJson = JSON.stringify(defaultJson);
+    }
     const creator = new SurveyCreator.SurveyCreator(creatorOptions);
-    creator.text = window.localStorage.getItem("survey-json-" + surveyId) || surveyJson || JSON.stringify(defaultJson);
+    creator.text = window.localStorage.getItem("survey-json-" + surveyId) || surveyJson;
     creator.saveSurveyFunc = (saveNo, callback) => {
         window.localStorage.setItem("survey-json-" + surveyId, creator.text);
         callback(saveNo, true);
