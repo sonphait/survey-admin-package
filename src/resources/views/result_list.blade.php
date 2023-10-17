@@ -10,7 +10,7 @@
     <script src="{{ asset('vendor/survey-manager/js/survey.i18n.min.js') }}"></script>
 
     <!-- jsPDF library -->
-    <script src="{{ asset('vendor/survey-manager/js/jspdf.umd.min.js') }}"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
 
     <!-- SurveyJS PDF Generator library -->
     <script src="{{ asset('vendor/survey-manager/js/survey.pdf.min.js') }}"></script>
@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="container">
+    <div class="container">.
         <h1>Result list of survey {{$survey->name}}</h1>
         <a href="{{ route('survey.admin.index') }}">
             <button>

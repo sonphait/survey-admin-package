@@ -17,6 +17,7 @@
     <!-- SurveyJS PDF Generator library -->
     <script src="{{ asset('vendor/survey-manager/js/survey.pdf.min.js') }}"></script>
 
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <style>
         .primary_btn {
             position: absolute;
@@ -32,10 +33,17 @@
             border-radius: 32px;
         }
 
-        .back_to_list {
+        .export_pdf_btn {
             margin-left: auto;
             margin-right: auto;
             left: 0px;
+            right: 0;
+        }
+
+        .back_to_list {
+            margin-left: auto;
+            margin-right: auto;
+            left: 300px;
             right: 0;
         }
     </style>
