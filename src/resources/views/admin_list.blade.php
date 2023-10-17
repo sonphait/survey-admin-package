@@ -14,20 +14,27 @@
 </head>
 <body>
 <div class="container">
+    <h1>List of all survey</h1>
     <form action="{{ route('survey.admin.create_new') }}" method="post">
         @csrf
         <input type="text" placeholder="Name of new survey" name="name">
         <input type="hidden" name="json" value="{}">
         <input type="submit" value="Submit">
     </form>
-
+    @if(session()->has('message'))
+    <h2>
+        {{ session()->get('message') }}
+    </h2>
+    @endif
     <div class="container">
+        @if(count($surveys) >0)
         <table>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Slug</th>
                 <th>Created at</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -48,11 +55,22 @@
                     </a>
                 </td>
                 <td>
+                    @if($row->json !== "{}" && count($row->results) > 0)
                     <a href="{{ route('survey.results.list', ['id' => $row->id]) }}">
                         <button>
                             Show results
                         </button>
                     </a>
+                    @endif
+                </td>
+                <td>
+                    @if($row->json !== "{}" && count($row->results) > 0)
+                    <a href="{{ route('survey.dashboard', ['id' => $row->id]) }}">
+                        <button>
+                            Show dashboard
+                        </button>
+                    </a>
+                    @endif
                 </td>
                 <td>
                     <a href="{{ route('survey.delete', ['id' => $row->id]) }}">
@@ -65,6 +83,9 @@
             @endforeach
             </tbody>
         </table>
+        @else
+        <h2>Currently no survey</h2>
+        @endif
     </div>
 </div>
 </body>

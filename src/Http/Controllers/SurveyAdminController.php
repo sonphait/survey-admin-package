@@ -15,7 +15,7 @@ class SurveyAdminController extends Controller
     public function index()
     {
         return view('survey-manager::admin_list', [
-            'surveys' => Survey::all()
+            'surveys' => Survey::with('results')->get()
         ]);
     }
 
@@ -51,18 +51,30 @@ class SurveyAdminController extends Controller
         $survey = Survey::findOrFail($id);
         $survey->delete();
 
-        return redirect()->route('survey.admin.index', ['surveys' => Survey::all()]);
+        return redirect()->back()->with('message', 'IT WORKS!');
     }
 
     public function result_list($id)
     {
-        $surveyResults = SurveyResult::where('survey_id', $id)->orderBy('created_at')->get();
-        return view('survey-manager::result_list', ['surveyResults' => $surveyResults]);
+        $survey = Survey::with(['results' => function ($q){
+            $q->orderBy('created_at');
+        }])->findOrFail($id);
+        return view('survey-manager::result_list', ['survey' => $survey]);
     }
 
     public function result_detail($id)
     {
         $result = SurveyResult::with('survey')->findOrFail($id);
         return view('survey-manager::result_detail', ['result' => $result]);
+    }
+
+    public function dashboard($id)
+    {
+        $surveys = Survey::with('results')->findOrFail($id);
+        $resultsJson = [];
+        foreach ($surveys->results as $result) {
+            $resultsJson[] = $result->json;
+        }
+        return view('survey-manager::dashboard', ['survey' => $surveys, 'resultsJson' => $resultsJson]);
     }
 }

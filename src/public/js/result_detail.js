@@ -13,6 +13,22 @@ $(document).ready(function() {
     survey.showProgressBar = "off";
     survey.showTimerPanel = "none";
 
+    const pdfDocOptions = {
+        fontSize: 12
+    };
+
+    const savePdf = function (surveyData) {
+        const surveyPdf = new SurveyPDF.SurveyPDF(surveyJson, pdfDocOptions);
+        surveyPdf.data = surveyData;
+        surveyPdf.save();
+    };
+
+    survey.addNavigationItem({
+        id: "pdf-export",
+        title: "Save as PDF",
+        action: () => savePdf(survey.data)
+    });
+
     $(function() {
         $("#surveyVizPanel").Survey({ model: survey });
     });

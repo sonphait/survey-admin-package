@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Survey results list</title>
+    <title>Result detail</title>
 
     <meta charset="utf-8">
     <meta name="viewport"
@@ -10,7 +10,13 @@
     <link href="{{ asset('vendor/survey-manager/css/defaultV2.css') }}" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="{{ asset('vendor/survey-manager/js/survey.jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/survey-manager/js/survey.i18n.min.js') }}"></script>
-    <meta name="csrf-token" content="{{csrf_token()}}">
+
+    <!-- jsPDF library -->
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+
+    <!-- SurveyJS PDF Generator library -->
+    <script src="{{ asset('vendor/survey-manager/js/survey.pdf.min.js') }}"></script>
+
     <style>
         .primary_btn {
             position: absolute;
@@ -36,6 +42,7 @@
 
 </head>
 <body>
+<button class="primary_btn export_pdf_btn" id="export_pdf_btn">Export survey</button>
 <a href="{{ route('survey.results.list', ['id' => $result->survey->id]) }}">
     <button class="primary_btn back_to_list">Back to list</button>
 </a>
