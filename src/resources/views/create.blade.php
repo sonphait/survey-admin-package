@@ -14,6 +14,8 @@
     <link href="{{ asset('vendor/survey-manager/css/survey-creator-core.min.css') }}" type="text/css" rel="stylesheet">
     <script src="{{ asset('vendor/survey-manager/js/survey-creator-core.min.js') }}"></script>
     <script src="{{ asset('vendor/survey-manager/js/survey-creator-knockout.min.js') }}"></script>
+    <script src="https://unpkg.com/survey-creator-core/survey-creator-core.i18n.min.js"></script>
+
     <meta name="csrf-token" content="{{csrf_token()}}">
     <style>
         .primary_btn {

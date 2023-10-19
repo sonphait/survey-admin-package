@@ -14,5 +14,6 @@ Route::group(
         Route::get('/{id}/results', 'SurveyAdminController@result_list')->name('survey.results.list');
         Route::get('/results/{id}', 'SurveyAdminController@result_detail')->name('survey.results.detail');
         Route::get('/dashboard/{id}', 'SurveyAdminController@dashboard')->name('survey.dashboard');
+        Route::post('/upload', 'SurveyAdminController@upload');
     }
 );

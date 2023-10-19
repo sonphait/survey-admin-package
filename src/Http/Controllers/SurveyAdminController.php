@@ -77,4 +77,14 @@ class SurveyAdminController extends Controller
         }
         return view('survey-manager::dashboard', ['survey' => $surveys, 'resultsJson' => $resultsJson]);
     }
+
+    public function upload(Request $request) {
+        $images = $request->all();
+        foreach ($images as $key => $image) {
+            $imageName = time().'.'.$image->extension();
+            $image->move(public_path('images'), $imageName);
+            $images[$key] = config('survey-manager.admin_domain')."images/".$imageName;
+        }
+        return $images;
+    }
 }
