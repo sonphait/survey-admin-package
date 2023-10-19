@@ -23,15 +23,11 @@ $(document).ready(function() {
         surveyPdf.save();
     };
 
-    survey.addNavigationItem({
-        id: "pdf-export",
-        title: "Save as PDF",
-        action: () => savePdf(survey.data)
+    $('#export_pdf_btn').click(function(){
+        savePdf(survey.data);
     });
 
-    $(function() {
-        $("#surveyVizPanel").Survey({ model: survey });
-    });
+    $("#surveyVizPanel").Survey({ model: survey });
 })
 
 

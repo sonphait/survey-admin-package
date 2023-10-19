@@ -5,15 +5,21 @@
 
     <meta charset="utf-8">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- ... -->
     <script type="text/javascript" src="https://unpkg.com/knockout/build/output/knockout-latest.js"></script>
 
-    <link href="{{ asset('vendor/survey-manager/css/defaultV2.css') }}" type="text/css" rel="stylesheet">
-    <script src="{{ asset('vendor/survey-manager/js/survey.core.min.js') }}"></script>
-    <script src="{{ asset('vendor/survey-manager/js/survey-knockout-ui.min.js') }}"></script>
+    <!-- SurveyJS resources -->
+    <link  href="https://unpkg.com/survey-core/defaultV2.min.css" type="text/css" rel="stylesheet">
+    <script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
+    <script src="https://unpkg.com/survey-knockout-ui/survey-knockout-ui.min.js"></script>
 
-    <link href="{{ asset('vendor/survey-manager/css/survey-creator-core.min.css') }}" type="text/css" rel="stylesheet">
-    <script src="{{ asset('vendor/survey-manager/js/survey-creator-core.min.js') }}"></script>
-    <script src="{{ asset('vendor/survey-manager/js/survey-creator-knockout.min.js') }}"></script>
+    <!-- Survey Creator resources -->
+    <link  href="https://unpkg.com/survey-creator-core/survey-creator-core.min.css" type="text/css" rel="stylesheet">
+    <script src="https://unpkg.com/survey-creator-core/survey-creator-core.min.js"></script>
+    <script src="https://unpkg.com/survey-creator-knockout/survey-creator-knockout.min.js"></script>
+    <!-- ... -->
+    <script src="https://unpkg.com/survey-creator-core/i18n/german.js"></script>
+
     <script src="https://unpkg.com/survey-creator-core/survey-creator-core.i18n.min.js"></script>
 
     <meta name="csrf-token" content="{{csrf_token()}}">

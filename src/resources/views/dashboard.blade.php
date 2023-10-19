@@ -13,7 +13,7 @@
 
     <!-- Third-party visualization libraries -->
     <script src="https://unpkg.com/plotly.js-dist-min/plotly.min.js"></script>
-     <script src="https://unpkg.com/wordcloud/src/wordcloud2.js"></script>
+    <script src="https://unpkg.com/wordcloud/src/wordcloud2.js"></script>
 
     <!-- SurveyJS Dashboard resources-->
     <link href="https://unpkg.com/survey-analytics/survey.analytics.min.css" rel="stylesheet">

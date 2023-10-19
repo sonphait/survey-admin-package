@@ -5,15 +5,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('vendor/survey-manager/js/result_list.js') }}"></script>
-    <link href="{{ asset('vendor/survey-manager/css/defaultV2.css') }}" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="{{ asset('vendor/survey-manager/js/survey.jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/survey-manager/js/survey.i18n.min.js') }}"></script>
+    <link href="https://unpkg.com/survey-jquery/defaultV2.min.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/survey-jquery/survey.jquery.min.js"></script>
 
     <!-- jsPDF library -->
     <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
 
     <!-- SurveyJS PDF Generator library -->
-    <script src="{{ asset('vendor/survey-manager/js/survey.pdf.min.js') }}"></script>
+    <script src="https://unpkg.com/survey-pdf/survey.pdf.min.js"></script>
     <title>Survey Results List</title>
     <style>
         table, th, td {
