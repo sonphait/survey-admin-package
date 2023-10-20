@@ -28,6 +28,11 @@ $(document).ready(function() {
     //change current language here
     SurveyCreator.localization.currentLocale = "en";
 
+    //uncomment to create file type question which use local when uploading file from client site
+    //More info: https://surveyjs.io/form-library/examples/file-upload/reactjs#content-docs
+    // Survey.Serializer.getProperty("file", "storeDataAsText").defaultValue = false;
+    // Survey.Serializer.getProperty("file", "storeDataAsText").visible = false;
+
     //uncomment to use local when uploading image
     // creator.onUploadFile.add(function (_, options) {
     //     const formData = new FormData();
