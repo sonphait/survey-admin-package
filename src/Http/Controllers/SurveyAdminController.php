@@ -4,6 +4,8 @@ namespace Sonphait\SurveyAdmin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Sonphait\SurveyAdmin\Models\Survey;
 use Sonphait\SurveyAdmin\Models\SurveyResult;
 
@@ -20,14 +22,19 @@ class SurveyAdminController extends Controller
     }
 
     public function createNew(Request $request) {
-        $survey = Survey::create($request->all());
-        return redirect()->route('survey.admin.index', ['surveys' => Survey::all()]);
+        try {
+            Survey::create($request->all());
+            $message = "Created successfully!";
+        } catch (Exception $e) {
+            Log::error('ERROR_CREATE_NEW_SURVEY:' . $e->getMessage());
+            $message = "Create survey failed!";
+        }
+        return redirect()->route('survey.admin.index', ['surveys' => Survey::all()])->with('message', $message);
     }
 
     public function showCreate($id)
     {
         $survey = Survey::findOrFail($id);
-
         return view('survey-manager::create', ['survey' => $survey]);
     }
 
@@ -39,9 +46,10 @@ class SurveyAdminController extends Controller
                 'data'      =>  $affectedRows,
                 'message'   =>  'Survey Result successfully created',
             ], 201);
-        } catch (Exception $ex) { // Anything that went wrong
+        } catch (Exception $e) { // Anything that went wrong
+            Log::error('ERROR_EDIT_SURVEY:' . $e->getMessage());
             return response()->json([
-                'message'   =>  $ex,
+                'message'   =>  $e,
             ], 500);
         }
     }
@@ -49,8 +57,12 @@ class SurveyAdminController extends Controller
     public function delete_survey($id)
     {
         $survey = Survey::findOrFail($id);
-        $survey->delete();
-
+        try {
+            $survey->delete();
+        } catch (Exception $e) {
+            Log::error('ERROR_DELETE_SURVEY:' . $e->getMessage());
+            return redirect()->back()->with('message', 'SOME ERRORS HAPPENED!');
+        }
         return redirect()->back()->with('message', 'IT WORKS!');
     }
 
@@ -81,9 +93,30 @@ class SurveyAdminController extends Controller
     public function upload(Request $request) {
         $images = $request->all();
         foreach ($images as $key => $image) {
-            $imageName = time().'.'.$image->extension();
+            if ($image->getSize()/1024 > config('survey-manager.max_upload_file_size')  || $image->getType() != "file" ) {
+                Log::error('ERROR_VALIDATE_IMAGE_UPLOAD:', ['image' => $image]);
+                return response()->json([
+                    'message'   =>  'image is not valid',
+                ], 500);
+            }
+            $name = $image->getClientOriginalName();
+            $imageName = time()."_".pathinfo($name,PATHINFO_FILENAME).'.'.$image->extension();
+
+            //store files in local
             $image->move(public_path('images'), $imageName);
             $images[$key] = config('survey-manager.admin_domain')."images/".$imageName;
+
+            //uncomment code to use S3 to store files
+//            $filePath = 'admin_files/' . $imageName;
+//            try {
+//                Storage::disk('s3')->put($filePath, file_get_contents($image));
+//                $images[$key] = config('survey-manager.admin_s3_url')."admin_files/".$imageName;
+//            } catch (Exception $e) {
+//                Log::error('ERROR_S3_UPLOAD_FILE_ADMIN:' . $e->getMessage());
+//                return response()->json([
+//                    'message'   =>  $e,
+//                ], 500);
+//            }
         }
         return $images;
     }

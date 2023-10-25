@@ -27,6 +27,10 @@ return [
     */
 
     //admin domain
-    'admin_domain'              => "http://127.0.0.1:8000/"
+    'admin_domain'              => "http://127.0.0.1:8000/",
+    'admin_s3_url'              => "http://127.0.0.1:9000/test-bucket/",
+
+
+    'max_upload_file_size'       => 10240,
 
 ];
