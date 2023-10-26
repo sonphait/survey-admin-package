@@ -22,9 +22,9 @@ php artisan vendor:publish --provider="Sonphait\SurveyAdmin\SurveyServiceProvide
 
 5) Go to index page: "admin/survey/index"
 6) [optional] Change values in config/survey-manager.php (route prefix, middleware)
-7) [optional] If you want to test function upload image to local when editing survey, do the following steps:
-   1. Uncomment save image to local code in js/create_survey.js
+7) [optional] If you want to test function upload image to local or S3 when editing survey, do the following steps:
+   1. Uncomment save image to local or S3 code in public/vendor/survey-manager/js/create_survey.js
    2. Change the domain value to your current one (Ex: http://127.0.0.1:8000/) in config/survey-manager.php
-* Note 1: To show images of survey on local client survey, you have to run survey_admin code and survey_client code simultaneously
-* Note 2: To create file type question which use local when uploading file from client site, uncomment code in js/create_survey.js
-* Note 3: To use S3 as file storage, uncomment code in function upload of SurveyAdminController.php
+* Note 1: (If you save image to local) To show images of survey on local client survey, you have to run survey_admin code and survey_client code simultaneously
+* Note 2: To create FILE question which use local or S3 when uploading file from client site, make properties 'storeDataAsText' value to false => uncomment code in public/vendor/survey-manager/js/create_survey.js
+* Note 3: To use S3 as file storage, change value of 'upload_to_S3' to true in config/survey-manager.php
