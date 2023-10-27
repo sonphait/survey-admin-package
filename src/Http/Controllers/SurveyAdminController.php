@@ -102,22 +102,20 @@ class SurveyAdminController extends Controller
             $name = $image->getClientOriginalName();
             $imageName = time()."_".pathinfo($name,PATHINFO_FILENAME).'.'.$image->extension();
 
-            if (config('survey-manager.upload_to_S3')) {
-                //use S3 to store files
-                $filePath = 'admin_files/' . $imageName;
-                try {
-                    Storage::disk('s3')->put($filePath, file_get_contents($image));
-                    $images[$key] = config('survey-manager.admin_s3_url')."admin_files/".$imageName;
-                } catch (Exception $e) {
-                    Log::error('ERROR_S3_UPLOAD_FILE_ADMIN:' . $e->getMessage());
-                    return response()->json([
-                        'message'   =>  $e,
-                    ], 500);
-                }
-            } else {
-                //store files in local
-                $image->move(public_path('images'), $imageName);
-                $images[$key] = config('survey-manager.admin_domain')."images/".$imageName;
+            //store files in local
+//            $image->move(public_path('images'), $imageName);
+//            $images[$key] = config('survey-manager.admin_domain')."images/".$imageName;
+
+            //use S3 to store files
+            $filePath = config('survey-manager.admin_s3_folder').$imageName;
+            try {
+                Storage::disk('s3')->put($filePath, file_get_contents($image));
+                $images[$key] = config('survey-manager.admin_s3_url').config('survey-manager.admin_s3_folder').$imageName;
+            } catch (Exception $e) {
+                Log::error('ERROR_S3_UPLOAD_FILE_ADMIN:' . $e->getMessage());
+                return response()->json([
+                    'message'   =>  $e,
+                ], 500);
             }
         }
         return $images;

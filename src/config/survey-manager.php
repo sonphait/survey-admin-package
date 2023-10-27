@@ -27,8 +27,7 @@ return [
     */
 
     //admin domain
-    'admin_domain'              => "http://127.0.0.1:8000/",
-    'admin_s3_url'              => "http://127.0.0.1:9000/test-bucket/",
+//    'admin_domain'              => "http://127.0.0.1:8000/",
 
 
     /*
@@ -37,7 +36,9 @@ return [
    |--------------------------------------------------------------------------
    */
 
-    'upload_to_S3'               => false,
+    'admin_s3_url'              => "http://127.0.0.1:9000/test-bucket/",
+    'admin_s3_folder'              => "admin/",
     'max_upload_file_size'       => 10240,
+
 
 ];
