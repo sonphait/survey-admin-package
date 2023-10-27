@@ -22,7 +22,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="container">.
+    <div class="container">
         <h1>Result list of survey {{$survey->name}}</h1>
         <a href="{{ route('survey.admin.index') }}">
             <button>
